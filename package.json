@@ -1,13 +1,17 @@
 {
-  "name": "ExoticVerbs",
+  "name": "exotic-verbs",
   "version": "1.0.0",
   "description": "A skill for alexa that brings you an exotic verb.",
   "main": "index.js",
   "repository": "https://github.com/finreinhard/ExoticVerbs",
   "author": "Fin Reinhard",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
   "private": false,
   "dependencies": {
-    "alexa-app": "^4.2.3"
+    "alexa-app": "^4.2.3",
+    "express": "^4.16.4"
   }
 }
