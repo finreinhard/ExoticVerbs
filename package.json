@@ -7,7 +7,7 @@
   "author": "Fin Reinhard",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "private": false,
   "dependencies": {
