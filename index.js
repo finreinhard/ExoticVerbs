@@ -40,6 +40,12 @@ app.intent('AMAZON.CancelIntent', {}, function (request, response) {
         .card('Anfrage gestoppt', 'Falls ich sonst noch was für Dich tun kann, sag Bescheid');
 });
 
+app.intent('AMAZON.FallbackIntent', {}, function (request, response) {
+    response
+        .say('Das habe ich leider nicht verstanden.')
+        .card('Häh?', 'Ich verstehe nicht was du meinst.');
+});
+
 app.post = function (request, response, type, exception) {
     if (exception) {
         return response
