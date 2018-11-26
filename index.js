@@ -18,7 +18,7 @@ app.intent('random', {}, function (request, response) {
     response
         .say('Ganz exotisch finde ich ' + verb + '.')
         .card(verb, 'Das ist ein sehr exotisches Verb.')
-        .shouldEndSession(true);
+        .shouldEndSession(false);
 });
 
 app.intent('AMAZON.HelpIntent', {}, function (request, response) {
@@ -32,20 +32,23 @@ app.intent('AMAZON.HelpIntent', {}, function (request, response) {
 app.intent('AMAZON.StopIntent', {}, function (request, response) {
     response
         .say('Halt Stopp!')
-        .card('Auf Wiedersehen', 'Ich mach jetzt auch Feierabend.');
+        .card('Auf Wiedersehen', 'Ich mach jetzt auch Feierabend.')
+        .shouldEndSession(true);
 });
 
 app.intent('AMAZON.CancelIntent', {}, function (request, response) {
     response
         .say('Kein Problem. Deine Anfrage wurde gestoppt.')
         .reprompt('Falls ich sonst noch was für Dich tun kann, sag Bescheid')
-        .card('Anfrage gestoppt', 'Falls ich sonst noch was für Dich tun kann, sag Bescheid');
+        .card('Anfrage gestoppt', 'Falls ich sonst noch was für Dich tun kann, sag Bescheid')
+        .shouldEndSession(false);
 });
 
 app.intent('AMAZON.FallbackIntent', {}, function (request, response) {
     response
         .say('Das habe ich leider nicht verstanden.')
-        .card('Häh?', 'Ich verstehe nicht was du meinst.');
+        .card('Häh?', 'Ich verstehe nicht was du meinst.')
+        .shouldEndSession(false);
 });
 
 app.post = function (request, response, type, exception) {
@@ -54,6 +57,7 @@ app.post = function (request, response, type, exception) {
             .clear()
             .say('Huch, da ist was schief gelaufen!')
             .card('Huch', 'Das hätte nicht passieren dürfen! Fehlermeldung: ' + exception)
+            .shouldEndSession(true)
             .send();
     }
 };
