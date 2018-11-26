@@ -8,7 +8,9 @@ var app = new alexa.app('exotic-verbs');
 app.launch(function (request, response) {
     response
         .say('Jetzt wirds exotisch!')
-        .card('Skill gestartet', 'Jetzts wirds exotisch');
+        .reprompt('Frag mich doch nach einem Verb.')
+        .card('Skill gestartet', 'Jetzts wirds exotisch. Frag mich mal nach einem Verb.')
+        .shouldEndSession(false);
 });
 
 app.intent('random', {}, function (request, response) {
