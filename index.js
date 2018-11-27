@@ -14,7 +14,10 @@ function sayRandomVerb(response) {
 }
 
 app.launch(function (request, response) {
-    sayRandomVerb(response);
+    response
+        .say('Jetzt wird\'s exotisch! Frag mich nach einem Verb.')
+        .card('Skill gestartet', 'Jetzt wirds exotisch. Frage mich nach einem Verb.')
+        .shouldEndSession(false);
 });
 
 app.intent('random', {}, function (request, response) {
