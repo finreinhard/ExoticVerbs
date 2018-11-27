@@ -5,25 +5,25 @@ var verbs = require('./verbs');
 var express_app = express();
 var app = new alexa.app('exotic-verbs');
 
-app.launch(function (request, response) {
-    response
-        .say('Jetzt wirds exotisch!')
-        .reprompt('Frag mich doch nach einem Verb.')
-        .card('Skill gestartet', 'Jetzts wirds exotisch. Frag mich mal nach einem Verb.')
-        .shouldEndSession(false);
-});
-
-app.intent('random', {}, function (request, response) {
+function sayRandomVerb(response) {
     var verb = verbs[Math.floor(Math.random() * verbs.length)];
     response
         .say('Ganz exotisch finde ich ' + verb + '.')
         .card(verb, 'Das ist ein sehr exotisches Verb.')
-        .shouldEndSession(false);
+        .shouldEndSession(true);
+}
+
+app.launch(function (request, response) {
+    sayRandomVerb(response);
+});
+
+app.intent('random', {}, function (request, response) {
+    sayRandomVerb(response);
 });
 
 app.intent('AMAZON.HelpIntent', {}, function (request, response) {
     response
-        .say('Du kannst mich nach einem Verb fragen oder die App wieder beenden.')
+        .say('Du kannst mich nach einem Verb fragen oder den Skill wieder beenden.')
         .reprompt('Was möchtest Du gerne tun?')
         .card('Hilfe', 'Frag mich nach einem Verb.')
         .shouldEndSession(false);
@@ -41,7 +41,7 @@ app.intent('AMAZON.CancelIntent', {}, function (request, response) {
         .say('Kein Problem. Deine Anfrage wurde gestoppt.')
         .reprompt('Falls ich sonst noch was für Dich tun kann, sag Bescheid')
         .card('Anfrage gestoppt', 'Falls ich sonst noch was für Dich tun kann, sag Bescheid')
-        .shouldEndSession(false);
+        .shouldEndSession(true);
 });
 
 app.intent('AMAZON.FallbackIntent', {}, function (request, response) {
