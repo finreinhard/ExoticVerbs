@@ -69,4 +69,6 @@ app.express({expressApp: express_app});
 
 express_app.listen(8080);
 
+console.log('app started');
+
 module.exports = app;
